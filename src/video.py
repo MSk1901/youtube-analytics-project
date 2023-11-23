@@ -11,12 +11,12 @@ class Video:
 
     def __init__(self, video_id):
         self.video_id = video_id
-        youtube = build('youtube', 'v3', developerKey=api_key)
-        video_response = youtube.videos().list(part='snippet,statistics,'
+        video_response = self.youtube.videos().list(part='snippet,statistics,'
                                                     'contentDetails,'
                                                     'topicDetails',
                                                id=video_id
                                                ).execute()
+        print(video_response)
         self.video_title = video_response['items'][0]['snippet']['title']
         self.url = f"https://www.youtube.com/watch?v={self.video_id}"
         self.view_count = video_response['items'][0]['statistics']['viewCount']
