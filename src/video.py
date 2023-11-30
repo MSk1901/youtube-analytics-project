@@ -11,15 +11,18 @@ class Video:
     def __init__(self, video_id):
         self.video_id = video_id
         try:
-            video_response = self.youtube.videos().list(part='snippet,statistics,'
-                                                             'contentDetails,'
-                                                             'topicDetails',
-                                                        id=video_id
-                                                        ).execute()
+            video_response = self.youtube.videos().list(
+                part='snippet,statistics,'
+                     'contentDetails,'
+                     'topicDetails',
+                id=video_id
+            ).execute()
             self.title = video_response['items'][0]['snippet']['title']
             self.url = f"https://www.youtube.com/watch?v={self.video_id}"
-            self.view_count = video_response['items'][0]['statistics']['viewCount']
-            self.like_count = video_response['items'][0]['statistics']['likeCount']
+            self.view_count = (
+                video_response)['items'][0]['statistics']['viewCount']
+            self.like_count = (
+                video_response)['items'][0]['statistics']['likeCount']
         except Exception:
             self.title = None
             self.url = None
